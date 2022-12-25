@@ -20,7 +20,7 @@ This is a simple application to manage countries and their cities. It is built u
 To install the application, run the following commands:
 
 ```bash
-git clone
+git clone https://github.com/itzAymvn/countries-manager.git
 cd countries-manager
 npm install
 ```
@@ -36,4 +36,4 @@ npm start
 
 ## License
 
-[![License](https://img.shields.io/github/license/itzaymvn/aymvn.me?style=for-the-badge)](https://github.com/itzAymvn/Aymvn.me/blob/master/LICENSE)
+[![License](https://img.shields.io/github/license/itzaymvn/countries-manager?style=for-the-badge)](https://github.com/itzAymvn/countries-manager/blob/master/LICENSE)
