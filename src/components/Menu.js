@@ -1,39 +1,37 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+// Bootstrap components
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+
 const Menu = () => {
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
-            <div className="container-fluid">
-                <Link className="navbar-brand" to="/">
-                    Home
-                </Link>
-                <div className="collapse navbar-collapse" id="navbarNav">
-                    <ul className="navbar-nav">
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/q3">
-                                Q3
-                            </Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/q4">
-                                Q4
-                            </Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/q5">
-                                Q5
-                            </Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/q6">
-                                Q6
-                            </Link>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        <Navbar bg="light" expand="lg">
+            <Container>
+                <Navbar.Brand>
+                    <Link to="/">Home</Link>
+                </Navbar.Brand>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                    <Nav className="me-auto">
+                        <Nav.Link as={Link} to="/q3">
+                            Question 3
+                        </Nav.Link>
+                        <Nav.Link as={Link} to="/q4">
+                            Question 4
+                        </Nav.Link>
+                        <Nav.Link as={Link} to="/q5">
+                            Question 5
+                        </Nav.Link>
+                        <Nav.Link as={Link} to="/q6">
+                            Question 6
+                        </Nav.Link>
+                    </Nav>
+                </Navbar.Collapse>
+            </Container>
+        </Navbar>
     );
 };
 
