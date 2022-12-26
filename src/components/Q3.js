@@ -1,18 +1,18 @@
-// React Hooks
-import { useSelector } from "react-redux";
+import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 
-const Q3 = () => {
-    // Tout les pays du store
-    const allPays = useSelector((state) => state.pays);
+const Q3 = (props) => {
+    // Récupérer tout les pays depuis le store
+    const { allPays } = props;
 
-    // Récupérer l'année indépendante de l'URL
+    // Récupérer l'année d'indépendance depuis l'url
     const { indepYear } = useParams();
 
     // Si l'année d'indépendance est définie, on filtre les pays par elle, sinon on affiche tout les pays
     const pays = indepYear
         ? allPays.filter((p) => p.indepYear === Number(indepYear))
         : allPays;
+
     return (
         <div className="row d-flex justify-content-center">
             <h3>
@@ -20,7 +20,9 @@ const Q3 = () => {
                     ? `Pays indépendant en ${indepYear}` // Si l'année est définie
                     : "Tous les pays"}{" "}
             </h3>
-            {pays.length > 0 ? ( // Si il y a des pays
+
+            {pays.length > 0 ? (
+                // Si il y a des pays on les affiche
                 pays.map((p, i) => {
                     return (
                         <div className="card m-3 col-md-2 col-sm-6" key={i}>
@@ -41,7 +43,11 @@ const Q3 = () => {
                                         )}{" "}
                                     km² <br />
                                     <strong>Population:</strong>{" "}
-                                    {p.population > 1_000_000
+                                    {p.population > 1_000_000_000
+                                        ? (
+                                              p.population / 1_000_000_000
+                                          ).toFixed(2) + " milliards"
+                                        : p.population > 1_000_000
                                         ? (p.population / 1_000_000).toFixed(
                                               2
                                           ) + " millions"
@@ -63,4 +69,12 @@ const Q3 = () => {
     );
 };
 
-export default Q3;
+// Récupérer les pays du store, pour les afficher
+const mapStateToProps = (state) => {
+    return {
+        allPays: state.pays,
+    };
+};
+
+// Connecter le composant au store
+export default connect(mapStateToProps)(Q3);

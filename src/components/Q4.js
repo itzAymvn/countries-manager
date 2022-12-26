@@ -1,10 +1,8 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-const Q4 = () => {
-    // Tout les pays du store
-    const pays = useSelector((state) => state.pays);
+const Q4 = (props) => {
+    const { pays } = props;
 
     // Récupérer les années indépendantes
     const indepYears = pays.map((p) => p.indepYear);
@@ -36,4 +34,10 @@ const Q4 = () => {
     );
 };
 
-export default Q4;
+const mapStateToProps = (state) => {
+    return {
+        pays: state.pays,
+    };
+};
+
+export default connect(mapStateToProps)(Q4);

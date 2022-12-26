@@ -1,10 +1,10 @@
 // React
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { connect } from "react-redux";
 
-const Q6 = () => {
+const Q6 = (props) => {
     // Tout les pays du store
-    const pays = useSelector((state) => state.pays);
+    const { pays } = props;
 
     // Continent
     const continents = pays.map((p) => p.continent);
@@ -23,12 +23,14 @@ const Q6 = () => {
 
     useEffect(() => {
         setPaysFiltres(
-            pays.filter((p) => {
-                return (
-                    p.population >= population &&
-                    (continent === "all" || p.continent === continent)
-                );
-            })
+            pays
+                .sort((a, b) => b.population - a.population)
+                .filter((p) => {
+                    return (
+                        p.population >= population &&
+                        (continent === "all" || p.continent === continent)
+                    );
+                })
         );
     }, [population, continent, pays]);
     return (
@@ -100,15 +102,21 @@ const Q6 = () => {
                                             <td>{p.surface}</td>
                                             <td>{p.continent}</td>
                                             <td>
-                                                {p.population > 1_000_000
+                                                {p.population > 1_000_000_000
+                                                    ? (
+                                                          p.population /
+                                                          1_000_000_000
+                                                      ).toFixed(2) +
+                                                      " milliards"
+                                                    : p.population > 1_000_000
                                                     ? (
                                                           p.population /
                                                           1_000_000
-                                                      ).toFixed(2) + "M"
+                                                      ).toFixed(2) + " millions"
                                                     : p.population > 1_000
                                                     ? (
                                                           p.population / 1_000
-                                                      ).toFixed(2) + "k"
+                                                      ).toFixed(2) + " milliers"
                                                     : p.population}
                                             </td>
                                             <td>
@@ -137,4 +145,10 @@ const Q6 = () => {
     );
 };
 
-export default Q6;
+const mapStateToProps = (state) => {
+    return {
+        pays: state.pays,
+    };
+};
+
+export default connect(mapStateToProps)(Q6);
