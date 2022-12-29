@@ -15,8 +15,8 @@ This is a simple application to manage countries and their cities. It is built u
 -   View countries by the date of independence
 -   Filter countries by continent and/or by their population
 
-## Installation
-
+## How to run it?
+Before you install 
 To install the application, run the following commands:
 
 ```bash
@@ -27,7 +27,7 @@ npm install
 
 ## Running the application
 
-To run the application, run the following command:
+To run the application, make sure you have [Node.js](https://nodejs.org/en/) installed and then run the following commands:
 
 ```bash
 npm install
